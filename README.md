@@ -60,8 +60,8 @@ Designed for developers who want **low-noise, early signals** integrated into th
 ---
 
 ## Architecture
-
 ![Architecture Diagram](docs/architecture.png)
+
 
 
 *RPC Watcher feeds the Agent Core, which connects to both a Signal Processor (that triggers Alerts/Logs/API) and customizable Agent Logic — mirroring the image you want to display.*
