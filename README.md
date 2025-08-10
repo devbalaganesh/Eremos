@@ -61,9 +61,134 @@ Designed for developers who want **low-noise, early signals** integrated into th
 
 ## Architecture
 
-```mermaid
 graph TD
-    A[RPC Watcher] --> B[Agent Core]
-    B --> C[Signal Processor]
-    C --> D[Alerts / Logs / API]
-    B --> E[Custom Agent Logic]
+A[RPC Watcher] --> B[Agent Core]
+B --> C[Signal Processor]
+C --> D[Alerts / Logs / API]
+B --> E[Custom Agent Logic]
+
+text
+
+**Flow:**  
+- **RPC Watcher:** Monitors on-chain events  
+- **Agent Core:** Main logic runner  
+- **Signal Processor:** Filters/noise-reduction →  
+- **Alerts / Logs / API:** Integration points  
+- **Custom Agent Logic:** Extend or compose your own modules
+
+---
+
+## Example Signal
+
+[Agent-000] 🚦 Funding detected
+Wallet: 9W7...KpT2 at 03:57:24Z
+
+[Agent-000] 🪙 Contract deployed 6s after funding
+Tx: 3he...8vGQ
+
+[Agent-000] 🤝 Linked wallet bundle observed
+Confidence: 0.92 — SIGNAL EMITTED
+
+text
+
+**JSON example:**
+{
+"agent": "Agent-000",
+"type": "launch_detected",
+"glyph": "Δ",
+"hash": "sig_xxx",
+"timestamp": "2025-07-10T03:57:30Z",
+"confidence": 0.92
+}
+
+text
+
+---
+
+## Signal Confidence
+
+Signals are scored according to:
+- **Funding Timing:** Large CEX → deploy gap (sec)
+- **Wallet Bundling:** Dense txs between related wallets
+- **Onchain Flags:** Mint patterns, meta-checks
+- **Dormancy:** Reactivation after long inactivity
+
+Confidence scores: `0.0` (noisy) → `1.0` (strong signal)
+
+---
+
+## Tech Stack
+
+| Layer         | Technology             |
+|---------------|-----------------------|
+| Frontend      | Next.js, Tailwind CSS |
+| Backend       | Node.js (TypeScript)  |
+| Chain Access  | Solana RPC/watchers   |
+| Language      | TypeScript            |
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js **v18+**
+- npm or yarn
+- Solana RPC endpoint ([Helius](https://www.helius.dev/) / [QuickNode](https://www.quicknode.com/))
+
+### Clone & Install
+git clone https://github.com/EremosCore/Eremos.git
+cd Eremos
+npm install
+
+text
+
+### Start Development
+npm run dev
+
+text
+Or run agents individually:
+node agents/theron.js
+
+text
+
+---
+
+## Key Folders
+
+/agents 📡 Agent logic & templates
+/utils 🛠 Shared utilities
+/types 🗂 TypeScript type definitions
+/scripts ⚙️ Dev scripts and setup
+/docs 📖 Whitepaper, diagrams, onboarding
+
+text
+
+---
+
+## Contributing
+
+Pull requests are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+- Fork the repo, create a branch (`feature/my-update`)
+- Make improvements—README, docs, code, onboarding
+- Push and open a PR (describe your changes)
+
+Please star ⭐ and watch 👀 the repo!
+
+---
+
+## License
+
+MIT © EremosCore  
+See [LICENSE](LICENSE) for full terms.
+
+---
+
+## Links
+
+- [GitHub](https://github.com/EremosCore/Eremos)
+- [Website](https://www.eremos.io/)
+- [Twitter](https://x.com/EremosCore)
+- [Superteam Earn Bounty](https://earn.superteam.fun/)
+
+---
