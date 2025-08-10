@@ -61,20 +61,9 @@ Designed for developers who want **low-noise, early signals** integrated into th
 
 ## Architecture
 
-graph TD
-A[RPC Watcher] --> B[Agent Core]
-B --> C[Signal Processor]
-C --> D[Alerts / Logs / API]
-B --> E[Custom Agent Logic]
+![Architecture Diagram](docs/architecture.png)
 
-text
-
-**Flow:**  
-- **RPC Watcher:** Monitors on-chain events  
-- **Agent Core:** Main logic runner  
-- **Signal Processor:** Filters/noise-reduction →  
-- **Alerts / Logs / API:** Integration points  
-- **Custom Agent Logic:** Extend or compose your own modules
+*RPC Watcher feeds the Agent Core, which connects to both a Signal Processor (that triggers Alerts/Logs/API) and customizable Agent Logic — mirroring the image you want to display.*
 
 ---
 
