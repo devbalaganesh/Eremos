@@ -31,6 +31,14 @@ Each agent runs independently — observing **funding flows, bundling behavior, 
 
 ---
 
+## 🏗️ Architecture
+
+![Architecture Diagram](docs/architecture.png)
+
+> *RPC Watcher feeds the Agent Core, which connects to both a Signal Processor (that triggers Alerts/Logs/API) and customizable Agent Logic — mirroring the diagram layout shown above.*
+
+---
+
 ## 🛠 Project Structure
 
 Eremos/
@@ -41,15 +49,12 @@ Eremos/
 ├── docs/ # Architecture diagrams, artwork, whitepaper
 └── .env.example # Environment variable template
 
-yaml
-Copy
-Edit
+text
 
 ---
 
 ## 📊 Example Signal
 
-```ts
 [agent-observer] → fresh funding detected from kraken (wallet: 6Yxk...P2M8) at 04:41:12Z
 [agent-observer] → contract probing detected within 4s (pump.fun interaction traced)
 [agent-observer] → token created at 04:41:17Z (tx: 5gW...pump)
@@ -57,94 +62,125 @@ Edit
 [agent-observer] → launch confidence spike (0.91) - emitting signal (elapsed: 13s)
 
 {
-  agent: "Observer",
-  type: "launch_detected",
-  glyph: "Δ",
-  hash: "sig_c7f9a3d2bc",
-  timestamp: "2025-06-12T04:41:25Z",
-  source: "agent-observer",
-  confidence: 0.91
+agent: "Observer",
+type: "launch_detected",
+glyph: "Δ",
+hash: "sig_c7f9a3d2bc",
+timestamp: "2025-06-12T04:41:25Z",
+source: "agent-observer",
+confidence: 0.91
 }
-📈 Signal Confidence
-Each emitted signal includes a confidence score (0–1) based on behavioral heuristics:
 
-CEX-origin funding (e.g., Kraken, Coinbase)
+text
 
-Time between funding → deploy
+---
 
-Wallet linkage density (bundled activity)
+## 📈 Signal Confidence
 
-Token metadata validation
+Each emitted signal includes a confidence score (`0–1`) based on behavioral heuristics:
+
+- CEX-origin funding (e.g., Kraken, Coinbase)
+- Time between funding → deploy
+- Wallet linkage density (bundled activity)
+- Token metadata validation
 
 Confidence is computed agent-side and logged with the signal.
 
-🧰 Tech Stack
-Frontend: Next.js, Tailwind CSS
+---
 
-Backend: Node.js (TypeScript-based agent runner)
+## 🧰 Tech Stack
 
-Language: TypeScript (typed logic across agents, utils, infra)
+| Layer         | Technology                |
+|---------------|--------------------------|
+| Frontend      | Next.js, Tailwind CSS    |
+| Backend       | Node.js (TypeScript)     |
+| Chain Layer   | Solana RPC/live watchers |
+| Language      | TypeScript               |
 
-Chain Layer: RPC watchers, mempool filters, native triggers
+---
 
-🚀 Getting Started
-✅ Prerequisites
-Node.js v18+
+## 🚀 Getting Started
 
-npm or yarn
+### ✅ Prerequisites
 
-Solana RPC endpoint (free from Helius, QuickNode, etc.)
+- Node.js **v18+**
+- npm or yarn
+- Solana RPC endpoint (free from Helius, QuickNode, etc.)
 
-📦 Installation
-bash
-Copy
-Edit
+### 📦 Installation
+
 git clone https://github.com/EremosCore/Eremos.git
 cd Eremos
 npm install
-⚙️ Setup
-bash
-Copy
-Edit
+
+text
+
+### ⚙️ Setup
+
 cp .env.example .env.local
-# Add your RPC URL + configuration in .env.local
-▶️ Run an Agent
-bash
-Copy
-Edit
+
+Add your RPC URL + configuration in .env.local
+text
+
+### ▶️ Run an Agent
+
 npm run dev
+
+text
 You should see logs from Agent-000 as it begins monitoring.
 
-🤝 Contributing
+---
+
+## 🤝 Contributing
+
 We welcome all contributors!
 
-Star ⭐ and Watch 👀 the repo
+- Star ⭐ and Watch 👀 the repo
+- Fork the repository
+- Create a feature branch
 
-Fork the repository
-
-Create a feature branch
-
-bash
-Copy
-Edit
 git checkout -b feature/my-improvement
-Make your changes (follow Prettier formatting)
 
-Commit your work
+text
 
-bash
-Copy
-Edit
+Make your changes (follow Prettier formatting), then:
+
 git commit -m "feat: improve docs"
-Push and open a Pull Request
+git push
 
-📌 See CONTRIBUTING.md for more.
+text
+Open a Pull Request!
 
-📜 License
+📌 See [CONTRIBUTING.md](CONTRIBUTING.md) for more.
+
+---
+
+## 📜 License
+
 MIT © Eremos LLC
 
-🔗 Links
-Twitter/X: @EremosCore
+---
 
-Website: Eremos.io
-Whitepaper: v1.0 PDF
+## 🔗 Links
+
+- Twitter/X: [@EremosCore](https://x.com/EremosCore)
+- Website: [eremos.io](https://www.eremos.io)
+- Whitepaper: [v1.0 PDF](docs/whitepaper.pdf)
+
+---
+
+## ❓ FAQ
+
+**Q: How do I run an Eremos agent locally?**  
+A: After cloning the repo and installing dependencies, run `npm run dev` to start the agent in development mode.
+
+**Q: Which Solana RPC providers work?**  
+A: You can use public endpoints from providers like Helius, QuickNode, or set your own in `.env.local`.
+
+**Q: What is the architecture diagram in this README?**  
+A: It shows how RPC Watcher, Agent Core, Signal Processor, and Alerts/Logs/API connect for signal detection.
+
+**Q: Who do I contact for questions?**  
+A: Feel free to open an issue in this repo or reach out on [Twitter](https://x.com/EremosCore).
+
+---
