@@ -31,6 +31,7 @@ Each agent runs independently — observing **funding flows, bundling behavior, 
 
 ---
 
+<<<<<<< HEAD
 ## 🏗️ Architecture
 
 ![Architecture Diagram](docs/architecture.png)
@@ -69,12 +70,45 @@ hash: "sig_c7f9a3d2bc",
 timestamp: "2025-06-12T04:41:25Z",
 source: "agent-observer",
 confidence: 0.91
+=======
+## Architecture
+![Architecture Diagram](docs/architecture.png)
+
+
+
+*RPC Watcher feeds the Agent Core, which connects to both a Signal Processor (that triggers Alerts/Logs/API) and customizable Agent Logic — mirroring the image you want to display.*
+
+---
+
+## Example Signal
+
+[Agent-000] 🚦 Funding detected
+Wallet: 9W7...KpT2 at 03:57:24Z
+
+[Agent-000] 🪙 Contract deployed 6s after funding
+Tx: 3he...8vGQ
+
+[Agent-000] 🤝 Linked wallet bundle observed
+Confidence: 0.92 — SIGNAL EMITTED
+
+text
+
+**JSON example:**
+{
+"agent": "Agent-000",
+"type": "launch_detected",
+"glyph": "Δ",
+"hash": "sig_xxx",
+"timestamp": "2025-07-10T03:57:30Z",
+"confidence": 0.92
+>>>>>>> 25bc51ec60e2b8d79530a5c2bc0a29cdc29954af
 }
 
 text
 
 ---
 
+<<<<<<< HEAD
 ## 📈 Signal Confidence
 
 Each emitted signal includes a confidence score (`0–1`) based on behavioral heuristics:
@@ -109,12 +143,46 @@ Confidence is computed agent-side and logged with the signal.
 
 ### 📦 Installation
 
+=======
+## Signal Confidence
+
+Signals are scored according to:
+- **Funding Timing:** Large CEX → deploy gap (sec)
+- **Wallet Bundling:** Dense txs between related wallets
+- **Onchain Flags:** Mint patterns, meta-checks
+- **Dormancy:** Reactivation after long inactivity
+
+Confidence scores: `0.0` (noisy) → `1.0` (strong signal)
+
+---
+
+## Tech Stack
+
+| Layer         | Technology             |
+|---------------|-----------------------|
+| Frontend      | Next.js, Tailwind CSS |
+| Backend       | Node.js (TypeScript)  |
+| Chain Access  | Solana RPC/watchers   |
+| Language      | TypeScript            |
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js **v18+**
+- npm or yarn
+- Solana RPC endpoint ([Helius](https://www.helius.dev/) / [QuickNode](https://www.quicknode.com/))
+
+### Clone & Install
+>>>>>>> 25bc51ec60e2b8d79530a5c2bc0a29cdc29954af
 git clone https://github.com/EremosCore/Eremos.git
 cd Eremos
 npm install
 
 text
 
+<<<<<<< HEAD
 ### ⚙️ Setup
 
 cp .env.example .env.local
@@ -182,5 +250,55 @@ A: It shows how RPC Watcher, Agent Core, Signal Processor, and Alerts/Logs/API c
 
 **Q: Who do I contact for questions?**  
 A: Feel free to open an issue in this repo or reach out on [Twitter](https://x.com/EremosCore).
+=======
+### Start Development
+npm run dev
+
+text
+Or run agents individually:
+node agents/theron.js
+
+text
+
+---
+
+## Key Folders
+
+/agents 📡 Agent logic & templates
+/utils 🛠 Shared utilities
+/types 🗂 TypeScript type definitions
+/scripts ⚙️ Dev scripts and setup
+/docs 📖 Whitepaper, diagrams, onboarding
+
+text
+
+---
+
+## Contributing
+
+Pull requests are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+- Fork the repo, create a branch (`feature/my-update`)
+- Make improvements—README, docs, code, onboarding
+- Push and open a PR (describe your changes)
+
+Please star ⭐ and watch 👀 the repo!
+
+---
+
+## License
+
+MIT © EremosCore  
+See [LICENSE](LICENSE) for full terms.
+
+---
+
+## Links
+
+- [GitHub](https://github.com/EremosCore/Eremos)
+- [Website](https://www.eremos.io/)
+- [Twitter](https://x.com/EremosCore)
+- [Superteam Earn Bounty](https://earn.superteam.fun/)
+>>>>>>> 25bc51ec60e2b8d79530a5c2bc0a29cdc29954af
 
 ---
